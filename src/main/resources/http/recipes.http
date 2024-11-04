@@ -1,0 +1,109 @@
+### populate with data
+GET {{url}}/recipes/populate
+
+### Create a new user
+POST {{url}}/auth/register/
+
+{
+    "username": "emilV",
+    "password": "1234"
+}
+
+### Login with user
+POST {{url}}/auth/login/
+
+{
+    "username": "emilV",
+    "password": "1234"
+}
+
+
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+### Add admin role to user
+POST {{url}}/auth/user/addrole/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "role": "admin"
+}
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+### Create a new recipe 2
+POST {{url}}/recipes
+Authorization: Bearer {{jwt_token}}
+
+{
+    "title": "chocolate truffle",
+    "ingredientsAndGrams": "100 g chocolate. 30 g butter. 25 g dobbel cream ",
+    "description": "smelt chokolade. mix. blend. ",
+    "difficulty": "EASY"
+
+}
+
+### Create a new recipe 3
+POST {{url}}/recipes
+Authorization: Bearer {{jwt_token}}
+
+{
+    "title": "Flan",
+    "ingredientsAndGrams": "200 g whole milk. 30 g butter. 25 g dobbel cream, 1 pod vanilla", 160 g eg yolks, 100 g sugar",
+    "description": "boil. mix. blend. chill. Bake for 45 min at 180°C.",
+    "difficulty": "HARD"
+
+}
+
+### Add regular role to user
+POST {{url}}/auth/user/addrole/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "role": "regular"
+}
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+### Create a new recipe 2
+POST {{url}}/recipes
+Authorization: Bearer {{jwt_token}}
+
+{
+    "title": "Vanilla Cake",
+    "ingredientsAndGrams": "200 g sugar. 150 g butter. 250 g flour. 2 eggs. 100 ml milk. 1 tsp vanilla extract.",
+    "description": "Mix butter and sugar. Add eggs and vanilla. Stir in flour and milk. Bake at 180°C for 30 minutes.",
+    "difficulty": "MEDIUM"
+}
+
+### get all recipes
+GET {{url}}/recipes
+
+### get a recipe by id
+GET {{url}}/recipes/1
+
+### updating/changing a recipe
+PUT {{url}}/recipes/1
+Authorization: Bearer {{jwt_token}}
+
+{
+    "title": "Spaghetti Bolognese",
+    "ingredientsAndGrams": "200 g minced beef. 100 g spaghetti. 50 g onions. 50 g tomatoes. 1 clove garlic.",
+    "description": "Cook spaghetti. Sauté onions and garlic. Add beef and tomatoes. Simmer and serve with pasta.",
+    "difficulty": "MEDIUM"
+}
+
+
+### Delete a recipe
+DELETE {{url}}/recipes/1
+Authorization: Bearer {{jwt_token}}
+
+
+
+
+###

@@ -1,0 +1,45 @@
+###
+### get all doctors
+GET {{url}}/doctors
+
+### get doctor by id
+GET {{url}}/doctors/1
+
+### get doctor by specialty
+GET {{url}}/doctors/specialty/SURGERY
+
+### get doctor by range of birthday
+GET {{url}}/doctors/birthday/range?from=1975-01-01&to=1979-01-01
+
+### create a doctor
+POST {{url}}/doctors
+
+{
+  "name": "Dr. Sophus Olsson",
+  "dateOfBirth": "1980-05-21",
+  "yearOfGraduation": 2008,
+  "nameOfClinic": "Green Valley Hospital",
+  "speciality": "PEDIATRICS"
+}
+
+### Force a error by creating a doctor with invalid specialty
+GET {{url}}/doctors/birthday/range?from=1975-01-01&to=19
+
+### Force a error by creating a doctor with invalid specialty
+POST {{url}}/doctors
+
+{
+  "name": "Dr. Sophus Olsson",
+  "dateOfBirth": "1980-05-21",
+  "yearOfGraduation": 2008,2
+
+}
+
+
+
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+###
